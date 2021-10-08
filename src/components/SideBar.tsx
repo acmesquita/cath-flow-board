@@ -21,7 +21,7 @@ export default () => {
         Output Node
       </div>
 
-      <footer className={styles.footer}>Criado por Catharina Mesquita</footer>
+      <footer className={styles.footer}>Criado com &#10084;&#65039; por <a href="https://github.com/acmesquita" target="_blank">Catharina Mesquita</a></footer>
     </aside>
   );
 };
