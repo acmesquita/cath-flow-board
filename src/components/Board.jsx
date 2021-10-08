@@ -1,24 +1,12 @@
 import { useState } from 'react';
-import { useCreateNewNode } from '../hooks/useCreateNewNode'
+import ReactFlow, { Controls, Background } from 'react-flow-renderer';
 
-import ReactFlow, { removeElements, addEdge, Controls, Background } from 'react-flow-renderer';
+import { useCreateNewNode } from '../hooks/useCreateNewNode'
 import { useElements } from '../hooks/useElement';
 
 export default function Board({ reactFlowWrapper }) {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  const { elements, setElements } = useElements()
-
-  const onConnect = (params) => {
-    setElements((els) => addEdge(params, els));
-  }
-
-  const onElementsRemove = (elementsToRemove) => {
-    setElements((els) => removeElements(elementsToRemove, els));
-  }
-
-  const onLoad = (_reactFlowInstance) => {
-    setReactFlowInstance(_reactFlowInstance);
-  }
+  const { elements, removeElement, addConnect, addElement } = useElements()
 
   const onDragOver = (event) => {
     event.preventDefault();
@@ -34,25 +22,23 @@ export default function Board({ reactFlowWrapper }) {
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top,
     });
-
     const label = prompt('Digite o valor:')
 
     if (!label) return
 
-    const newNode = useCreateNewNode({
+    addElement(useCreateNewNode({
       label,
       type,
       position
-    })
-    setElements((es) => es.concat(newNode))
+    }))
   };
 
   return (
     <ReactFlow
       elements={elements}
-      onConnect={onConnect}
-      onElementsRemove={onElementsRemove}
-      onLoad={onLoad}
+      onConnect={addConnect}
+      onElementsRemove={removeElement}
+      onLoad={setReactFlowInstance}
       onDrop={onDrop}
       onDragOver={onDragOver}
     >
