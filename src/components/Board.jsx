@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { v4 } from 'uuid'
 
 import ReactFlow, {
   removeElements,
@@ -7,8 +8,7 @@ import ReactFlow, {
   Background,
 } from 'react-flow-renderer';
 
-let id = 0;
-const getId = () => `dndnode_${id++}`;
+const getId = () => v4();
 
 export default function Board({ reactFlowWrapper }) {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
