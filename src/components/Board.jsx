@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { v4 } from 'uuid'
+import { useCreateNewElement } from '../hooks/useCreateNewElement'
 
 import ReactFlow, {
   removeElements,
@@ -7,8 +7,6 @@ import ReactFlow, {
   Controls,
   Background,
 } from 'react-flow-renderer';
-
-const getId = () => v4();
 
 export default function Board({ reactFlowWrapper }) {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
@@ -48,35 +46,12 @@ export default function Board({ reactFlowWrapper }) {
 
     if (!label) return
 
-    if (type === 'input') {
-      const newNode = {
-        id: getId(),
-        type,
-        position,
-        data: { label },
-        sourcePosition: 'right',
-      };
-      setElements((es) => es.concat(newNode))
-    } else if (type === 'default') {
-      const newNode = {
-        id: getId(),
-        type,
-        position,
-        data: { label },
-        sourcePosition: 'right',
-        targetPosition: 'left',
-      };
-      setElements((es) => es.concat(newNode))
-    } else {
-      const newNode = {
-        id: getId(),
-        type,
-        position,
-        data: { label },
-        targetPosition: 'left',
-      };
-      setElements((es) => es.concat(newNode))
-    }
+    const newNode = useCreateNewElement({
+      label,
+      type,
+      position
+    })
+    setElements((es) => es.concat(newNode))
   };
 
   function saveBoard() {
