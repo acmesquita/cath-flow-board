@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonDrag } from '../components/ButtonDrag'
 import styles from '../styles/components/Sidebar.module.css'
 
-export default () => {
+export default function Sidebar() {
   return (
     <aside className={styles.container}>
       <h1>Cath Flow Board</h1>
@@ -12,7 +12,7 @@ export default () => {
       <ButtonDrag type="default" label="Default Node" />
       <ButtonDrag className={styles.output} type="output" label="Output Node" />
 
-      <footer className={styles.footer}>Criado com &#10084;&#65039; por <a href="https://github.com/acmesquita" target="_blank">Catharina Mesquita</a></footer>
+      <footer className={styles.footer}>Criado com &#10084;&#65039; por <a href="https://github.com/acmesquita">Catharina Mesquita</a></footer>
     </aside>
   );
 };
