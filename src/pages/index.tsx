@@ -1,11 +1,12 @@
 import { useRef } from 'react';
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 
 import { ReactFlowProvider } from 'react-flow-renderer';
 
 import Sidebar from '../components/SideBar';
 import Board from '../components/Board';
+
+import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const reactFlowWrapper = useRef(null);
