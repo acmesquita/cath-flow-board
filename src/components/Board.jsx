@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useCreateNewNode } from '../hooks/useCreateNewNode'
 
-import ReactFlow, {
-  removeElements,
-  addEdge,
-  Controls,
-  Background,
-} from 'react-flow-renderer';
+import ReactFlow, { removeElements, addEdge, Controls, Background } from 'react-flow-renderer';
 
 export default function Board({ reactFlowWrapper }) {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
@@ -20,12 +15,17 @@ export default function Board({ reactFlowWrapper }) {
     saveBoard()
   }, [elements])
 
-  const onConnect = (params) => setElements((els) => addEdge(params, els));
-  const onElementsRemove = (elementsToRemove) =>
-    setElements((els) => removeElements(elementsToRemove, els));
+  const onConnect = (params) => {
+    setElements((els) => addEdge(params, els));
+  }
 
-  const onLoad = (_reactFlowInstance) =>
+  const onElementsRemove = (elementsToRemove) => {
+    setElements((els) => removeElements(elementsToRemove, els));
+  }
+
+  const onLoad = (_reactFlowInstance) => {
     setReactFlowInstance(_reactFlowInstance);
+  }
 
   const onDragOver = (event) => {
     event.preventDefault();

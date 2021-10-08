@@ -1,32 +1,19 @@
-import { v4 } from 'uuid'
+import { v4 as generateRandomID } from 'uuid'
 
 export function useCreateNewNode({ label, type, position }) {
-  const getRandomId = () => v4();
+  const createNode = (sourcePosition, targetPosition = undefined) => ({
+    id: generateRandomID(),
+    type,
+    position,
+    data: { label },
+    sourcePosition,
+    targetPosition
+  })
 
-  if (type === 'input') {
-    return {
-      id: getRandomId(),
-      type,
-      position,
-      data: { label },
-      sourcePosition: 'right',
-    };
-  } else if (type === 'default') {
-    return {
-      id: getRandomId(),
-      type,
-      position,
-      data: { label },
-      sourcePosition: 'right',
-      targetPosition: 'left',
-    };
-  } else {
-    return {
-      id: getRandomId(),
-      type,
-      position,
-      data: { label },
-      targetPosition: 'left',
-    };
+  switch (type) {
+    case 'input': return createNode('right')
+    case 'default': return createNode('right', 'left')
+    case 'output': return createNode(undefined, 'left')
+    default: return {}
   }
 }
