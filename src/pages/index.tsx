@@ -21,8 +21,8 @@ export default function Home() {
           <div className={styles.reactflowWrapper} ref={reactFlowWrapper}>
             <Board reactFlowWrapper={reactFlowWrapper} />
           </div>
+          <Sidebar />
         </ReactFlowProvider>
-        <Sidebar />
       </div>
     </div>
   )

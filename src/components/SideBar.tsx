@@ -1,25 +1,16 @@
 import React from 'react';
+import { ButtonDrag } from '../components/ButtonDrag'
 import styles from '../styles/components/Sidebar.module.css'
 
 export default () => {
-  const onDragStart = (event, nodeType) => {
-    event.dataTransfer.setData('application/reactflow', nodeType);
-    event.dataTransfer.effectAllowed = 'move';
-  };
-
   return (
     <aside className={styles.container}>
       <h1>Cath Flow Board</h1>
-      <div className="description">Escolha entre as opções, clique e arraste para a tela.</div>
-      <div className={`${styles.node} ${styles.input}`} onDragStart={(event) => onDragStart(event, 'input')} draggable>
-        Input Node
-      </div>
-      <div className={styles.node} onDragStart={(event) => onDragStart(event, 'default')} draggable>
-        Default Node
-      </div>
-      <div className={`${styles.node} ${styles.output}`} onDragStart={(event) => onDragStart(event, 'output')} draggable>
-        Output Node
-      </div>
+      <p>Escolha entre as opções, clique e arraste para a tela.</p>
+
+      <ButtonDrag className={styles.input} type="input" label="Input Node" />
+      <ButtonDrag type="default" label="Default Node" />
+      <ButtonDrag className={styles.output} type="output" label="Output Node" />
 
       <footer className={styles.footer}>Criado com &#10084;&#65039; por <a href="https://github.com/acmesquita" target="_blank">Catharina Mesquita</a></footer>
     </aside>
