@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useCreateNewElement } from '../hooks/useCreateNewElement'
+import { useCreateNewNode } from '../hooks/useCreateNewNode'
 
 import ReactFlow, {
   removeElements,
@@ -46,7 +46,7 @@ export default function Board({ reactFlowWrapper }) {
 
     if (!label) return
 
-    const newNode = useCreateNewElement({
+    const newNode = useCreateNewNode({
       label,
       type,
       position

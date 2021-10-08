@@ -1,6 +1,6 @@
 import { v4 } from 'uuid'
 
-export function useCreateNewElement({ label, type, position }) {
+export function useCreateNewNode({ label, type, position }) {
   const getRandomId = () => v4();
 
   if (type === 'input') {
