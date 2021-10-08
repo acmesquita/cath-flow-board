@@ -1,0 +1,39 @@
+.container {
+  width: 275px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  align-items: center;
+  background-color: #8a9197;
+  color: azure;
+  
+  font-size: 18px;
+}
+
+.node {
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  color: #222;
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+  width: 150px;
+  background: #fff;
+}
+
+.input {
+  border-color: #0041d0;
+}
+
+.output {
+  border-color: #ff0072;
+}
+
+.footer {
+  position: fixed;
+  bottom: 16px;
+  font-size: 14px;
+}
