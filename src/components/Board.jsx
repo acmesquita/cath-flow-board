@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactFlow, { Controls, Background } from 'react-flow-renderer';
 
-import { useCreateNewNode } from '../hooks/useCreateNewNode'
+import { createNewNode } from '../helpers/createNewNode'
 import { useElements } from '../hooks/useElement';
 
 export default function Board({ reactFlowWrapper }) {
@@ -26,7 +26,7 @@ export default function Board({ reactFlowWrapper }) {
 
     if (!label) return
 
-    addElement(useCreateNewNode({
+    addElement(createNewNode({
       label,
       type,
       position

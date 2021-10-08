@@ -1,6 +1,6 @@
 import { v4 as generateRandomID } from 'uuid'
 
-export function useCreateNewNode({ label, type, position }) {
+export function createNewNode({ label, type, position }) {
   const createNode = (sourcePosition, targetPosition = undefined) => ({
     id: generateRandomID(),
     type,
