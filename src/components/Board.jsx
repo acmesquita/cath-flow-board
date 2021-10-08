@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCreateNewNode } from '../hooks/useCreateNewNode'
 
 import ReactFlow, { removeElements, addEdge, Controls, Background } from 'react-flow-renderer';
+import { useElements } from '../hooks/useElement';
 
 export default function Board({ reactFlowWrapper }) {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  const [elements, setElements] = useState([]);
-
-  useEffect(() => {
-    initializeBoard()
-  }, [])
-
-  useEffect(() => {
-    saveBoard()
-  }, [elements])
+  const { elements, setElements } = useElements()
 
   const onConnect = (params) => {
     setElements((els) => addEdge(params, els));
@@ -53,19 +46,6 @@ export default function Board({ reactFlowWrapper }) {
     })
     setElements((es) => es.concat(newNode))
   };
-
-  function saveBoard() {
-    const elementsJson = JSON.stringify(elements)
-    localStorage.setItem('cath-flow-board', elementsJson)
-  }
-
-  function initializeBoard() {
-    const board = localStorage.getItem('cath-flow-board')
-    if (board) {
-      const elementsJson = JSON.parse(board)
-      setElements(elementsJson)
-    }
-  }
 
   return (
     <ReactFlow
