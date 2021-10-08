@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ReactFlow, {
   removeElements,
@@ -13,6 +13,15 @@ const getId = () => `dndnode_${id++}`;
 export default function Board({ reactFlowWrapper }) {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState([]);
+
+  useEffect(() => {
+    initializeBoard()
+  }, [])
+
+  useEffect(() => {
+    saveBoard()
+  }, [elements])
+
   const onConnect = (params) => setElements((els) => addEdge(params, els));
   const onElementsRemove = (elementsToRemove) =>
     setElements((els) => removeElements(elementsToRemove, els));
@@ -40,7 +49,6 @@ export default function Board({ reactFlowWrapper }) {
     if (!label) return
 
     if (type === 'input') {
-
       const newNode = {
         id: getId(),
         type,
@@ -48,10 +56,8 @@ export default function Board({ reactFlowWrapper }) {
         data: { label },
         sourcePosition: 'right',
       };
-
-      setElements((es) => es.concat(newNode));
+      setElements((es) => es.concat(newNode))
     } else if (type === 'default') {
-
       const newNode = {
         id: getId(),
         type,
@@ -60,8 +66,7 @@ export default function Board({ reactFlowWrapper }) {
         sourcePosition: 'right',
         targetPosition: 'left',
       };
-
-      setElements((es) => es.concat(newNode));
+      setElements((es) => es.concat(newNode))
     } else {
       const newNode = {
         id: getId(),
@@ -70,11 +75,22 @@ export default function Board({ reactFlowWrapper }) {
         data: { label },
         targetPosition: 'left',
       };
-
-      setElements((es) => es.concat(newNode));
+      setElements((es) => es.concat(newNode))
     }
-
   };
+
+  function saveBoard() {
+    const elementsJson = JSON.stringify(elements)
+    localStorage.setItem('cath-flow-board', elementsJson)
+  }
+
+  function initializeBoard() {
+    const board = localStorage.getItem('cath-flow-board')
+    if (board) {
+      const elementsJson = JSON.parse(board)
+      setElements(elementsJson)
+    }
+  }
 
   return (
     <ReactFlow
