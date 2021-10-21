@@ -10,6 +10,7 @@
   color: azure;
   
   font-size: 18px;
+  box-shadow: 6px 1px 8px 4px #5a5858;
 }
 
 .node {
